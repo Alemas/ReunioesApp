@@ -42,8 +42,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="XNH-Kp-XnH" kind="show" id="hFe-Ud-yll"/>
-                        <segue destination="Pb7-vY-Z5n" kind="show" id="iL6-ZV-vDd"/>
+                        <segue destination="XNH-Kp-XnH" kind="show" identifier="Login" id="hFe-Ud-yll"/>
+                        <segue destination="Pb7-vY-Z5n" kind="show" identifier="Cadastrar" id="iL6-ZV-vDd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -104,7 +104,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="XNH-Kp-XnH" kind="show" id="wjB-4E-aem"/>
+                        <segue destination="XNH-Kp-XnH" kind="show" identifier="Cadastrado" id="wjB-4E-aem"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLt-uk-gMW" userLabel="First Responder" sceneMemberID="firstResponder"/>
