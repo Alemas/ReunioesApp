@@ -13,9 +13,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//            var q = PFInstallation.query()
-//        
-//        PFPush.sendPushMessageToQueryInBackground(q, withMessage: "Aeeeeeeee")
+//Teste
+//        var push:PFPush = PFPush()
+//        push.setChannel("HAHAHA")
+//        push.setMessage("Aeeeeeeeeee")
+//        push.sendPushInBackground()
         
         }
 
