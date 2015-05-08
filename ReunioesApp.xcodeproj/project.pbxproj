@@ -13,6 +13,9 @@
 		0A6F84201AFA5EF500CF8D92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F841F1AFA5EF500CF8D92 /* Images.xcassets */; };
 		0A6F84231AFA5EF500CF8D92 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F84211AFA5EF500CF8D92 /* LaunchScreen.xib */; };
 		0A6F842F1AFA5EF600CF8D92 /* ReunioesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F842E1AFA5EF600CF8D92 /* ReunioesAppTests.swift */; };
+		0A6F84391AFBA73D00CF8D92 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F84381AFBA73D00CF8D92 /* User.swift */; };
+		0A6F843B1AFCDD8B00CF8D92 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F843A1AFCDD8B00CF8D92 /* Meeting.swift */; };
+		0A6F843D1AFCE12F00CF8D92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F843C1AFCE12F00CF8D92 /* LoginViewController.swift */; };
 		EBB981B41AFB99C600163647 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB981B21AFB99C600163647 /* Bolts.framework */; };
 		EBB981B51AFB99C600163647 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB981B31AFB99C600163647 /* Parse.framework */; };
 		EBB981BA1AFB99EC00163647 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB981B81AFB99DD00163647 /* CFNetwork.framework */; };
@@ -49,6 +52,9 @@
 		0A6F84281AFA5EF600CF8D92 /* ReunioesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReunioesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6F842D1AFA5EF600CF8D92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A6F842E1AFA5EF600CF8D92 /* ReunioesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReunioesAppTests.swift; sourceTree = "<group>"; };
+		0A6F84381AFBA73D00CF8D92 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0A6F843A1AFCDD8B00CF8D92 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		0A6F843C1AFCE12F00CF8D92 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EBB981B21AFB99C600163647 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		EBB981B31AFB99C600163647 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		EBB981B61AFB99D600163647 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -118,7 +124,10 @@
 			children = (
 				EBB981B11AFB957200163647 /* Framework */,
 				0A6F84181AFA5EF500CF8D92 /* AppDelegate.swift */,
+				0A6F843A1AFCDD8B00CF8D92 /* Meeting.swift */,
+				0A6F84381AFBA73D00CF8D92 /* User.swift */,
 				0A6F841A1AFA5EF500CF8D92 /* ViewController.swift */,
+				0A6F843C1AFCE12F00CF8D92 /* LoginViewController.swift */,
 				0A6F841C1AFA5EF500CF8D92 /* Main.storyboard */,
 				0A6F841F1AFA5EF500CF8D92 /* Images.xcassets */,
 				0A6F84211AFA5EF500CF8D92 /* LaunchScreen.xib */,
@@ -273,7 +282,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A6F841B1AFA5EF500CF8D92 /* ViewController.swift in Sources */,
+				0A6F843B1AFCDD8B00CF8D92 /* Meeting.swift in Sources */,
 				0A6F84191AFA5EF500CF8D92 /* AppDelegate.swift in Sources */,
+				0A6F843D1AFCE12F00CF8D92 /* LoginViewController.swift in Sources */,
+				0A6F84391AFBA73D00CF8D92 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
