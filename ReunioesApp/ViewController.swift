@@ -13,11 +13,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//Teste
-//        var push:PFPush = PFPush()
-//        push.setChannel("HAHAHA")
-//        push.setMessage("Aeeeeeeeeee")
-//        push.sendPushInBackground()
         
         }
 
