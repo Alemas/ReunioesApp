@@ -5,15 +5,15 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="ReunioesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="LoginViewController" customModule="ReunioesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -41,6 +41,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="didPressLogin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Eo8-g4-Kwf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pW2-ds-Jlh">
                                 <rect key="frame" x="16" y="361" width="568" height="30"/>
@@ -50,27 +53,46 @@
                                 <state key="normal" title="Sign Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="didPressSignUp:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="YyP-E6-iIR"/>
+                                </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ldV-PH-acO">
+                                <rect key="frame" x="290" y="81" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="0Ku-y3-AJ7"/>
+                                    <constraint firstAttribute="height" constant="20" id="6Lf-2c-zhW"/>
+                                </constraints>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZMw-7m-uxw" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="3bC-QU-9OG"/>
                             <constraint firstItem="zmd-Wi-Fl3" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="5ky-ru-nkJ"/>
+                            <constraint firstAttribute="centerX" secondItem="ldV-PH-acO" secondAttribute="centerX" id="ODY-gp-uVk"/>
                             <constraint firstItem="zmd-Wi-Fl3" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="157" id="UMm-0d-ufN"/>
                             <constraint firstItem="ROw-7U-Qpz" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="XZv-9e-oFL"/>
                             <constraint firstItem="ZMw-7m-uxw" firstAttribute="top" secondItem="ROw-7U-Qpz" secondAttribute="bottom" constant="78" id="ZVP-uL-8fS"/>
                             <constraint firstItem="ZMw-7m-uxw" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="cIB-iW-YXs"/>
                             <constraint firstItem="ROw-7U-Qpz" firstAttribute="top" secondItem="zmd-Wi-Fl3" secondAttribute="bottom" constant="8" id="ezN-9h-Yid"/>
                             <constraint firstItem="ROw-7U-Qpz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fHz-Xg-1rJ"/>
+                            <constraint firstItem="ldV-PH-acO" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="61" id="gcG-7J-8EY"/>
                             <constraint firstItem="pW2-ds-Jlh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="h2m-zc-Yvn"/>
                             <constraint firstItem="pW2-ds-Jlh" firstAttribute="top" secondItem="ZMw-7m-uxw" secondAttribute="bottom" constant="8" id="lXL-Fm-eeQ"/>
                             <constraint firstItem="pW2-ds-Jlh" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="xRE-Pr-UBV"/>
                             <constraint firstItem="zmd-Wi-Fl3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zAE-KI-Z0o"/>
                         </constraints>
+                        <connections>
+                            <action selector="didEndEditing:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uFX-XB-qCc"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="ldV-PH-acO" id="Kh4-js-siH"/>
+                        <outlet property="txfPassword" destination="ROw-7U-Qpz" id="MnA-Ch-aPF"/>
+                        <outlet property="txfUsername" destination="zmd-Wi-Fl3" id="ilL-0a-FZH"/>
                         <segue destination="XNH-Kp-XnH" kind="show" identifier="Login" id="hFe-Ud-yll"/>
-                        <segue destination="Pb7-vY-Z5n" kind="show" identifier="Cadastrar" id="iL6-ZV-vDd"/>
+                        <segue destination="Pb7-vY-Z5n" kind="presentation" identifier="showSignUp" id="iL6-ZV-vDd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -95,10 +117,10 @@
             </objects>
             <point key="canvasLocation" x="-60" y="993"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="eIC-Mk-pRz">
             <objects>
-                <viewController id="Pb7-vY-Z5n" sceneMemberID="viewController">
+                <viewController id="Pb7-vY-Z5n" customClass="SignUpViewController" customModule="ReunioesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oYl-JU-M5m"/>
                         <viewControllerLayoutGuide type="bottom" id="1fq-Qu-gBO"/>

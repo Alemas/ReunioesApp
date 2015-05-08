@@ -10,9 +10,18 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var txfPassword: UITextField!
+    @IBOutlet weak var txfUsername: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        User.signUp("Uriel", password: "12345", email: "u@gmail.com", company: "BEPiD")
+//        User.signUp("Mateus", password: "12345", email: "m@gmail.com", company: "BEPiD")
+//        User.signUp("Eduardo", password: "12345", email: "e@gmail.com", company: "BEPiD")
+//        User.signUp("Natasha", password: "12345", email: "n@gmail.com", company: "BEPiD")
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -21,15 +30,50 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func didPressLogin(sender: AnyObject) {
+        
+        var username = self.txfUsername.text
+        var password = self.txfPassword.text
+        
+        if password == "" || username == ""{
+            return
+        }
+        
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
+        
+        self.txfPassword.text = ""
+        
+        let closure = {(succeeded:Bool) -> Void in
+                    
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.hidden = true
+            
+            if (User.getCurrentUser() != nil) {
+                println(username)
+            } else {
+                
+            }
+        
+        
+        }
+        
+        User.login(username, password: password, closure: closure)
+        
     }
-    */
 
+    @IBAction func didPressSignUp(sender: AnyObject) {
+        self.performSegueWithIdentifier("showSignup", sender: nil)
+        
+    }
+
+    @IBAction func unwindFromSignUpSegue(segue:UIStoryboardSegue) {
+        
+        
+        
+    }
+    @IBAction func didEndEditing(sender: AnyObject) {
+        sender.endEditing(true)
+    }
+    
 }
