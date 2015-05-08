@@ -16,18 +16,43 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        User.signUp("Uriel", password: "12345", email: "u@gmail.com", company: "BEPiD")
-//        User.signUp("Mateus", password: "12345", email: "m@gmail.com", company: "BEPiD")
-//        User.signUp("Eduardo", password: "12345", email: "e@gmail.com", company: "BEPiD")
-//        User.signUp("Natasha", password: "12345", email: "n@gmail.com", company: "BEPiD")
         
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.activityIndicator.stopAnimating()
+        if User.getCurrentUser() != nil {
+            self.performSegueWithIdentifier("showMainMenu", sender: nil)
+        }
+    }
+    
+    func login(){
+        
+        self.activityIndicator.startAnimating()
+        
+        let closure = {(succeeded:Bool) -> Void in
+            
+            self.activityIndicator.stopAnimating()
+            
+            if (succeeded) {
+                self.performSegueWithIdentifier("showMainMenu", sender: nil)
+            } else {
+                var alert = UIAlertView(title: "Error", message: "Invalid Login Paramenters", delegate: nil, cancelButtonTitle: "Ok")
+                alert.show()
+            }
+            
+        }
+        
+        User.login(txfUsername.text, password: txfPassword.text, closure: closure)
+        
+        self.txfPassword.text = ""
+
     }
     
     @IBAction func didPressLogin(sender: AnyObject) {
@@ -36,42 +61,30 @@ class LoginViewController: UIViewController {
         var password = self.txfPassword.text
         
         if password == "" || username == ""{
+            var alert = UIAlertView(title: "Error", message: "You must inform username and password", delegate: nil, cancelButtonTitle: "Ok")
+            alert.show()
             return
         }
         
-        self.activityIndicator.hidden = false
-        self.activityIndicator.startAnimating()
-        
-        self.txfPassword.text = ""
-        
-        let closure = {(succeeded:Bool) -> Void in
-                    
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.hidden = true
-            
-            if (User.getCurrentUser() != nil) {
-                println(username)
-            } else {
-                
-            }
-        
-        
-        }
-        
-        User.login(username, password: password, closure: closure)
+        self.login()
         
     }
 
     @IBAction func didPressSignUp(sender: AnyObject) {
-        self.performSegueWithIdentifier("showSignup", sender: nil)
-        
+        self.performSegueWithIdentifier("showSignUp", sender: nil)
     }
 
     @IBAction func unwindFromSignUpSegue(segue:UIStoryboardSegue) {
-        
-        
+        let vc:SignUpViewController = segue.sourceViewController as! SignUpViewController
+        if vc.didCreateNewAccount {
+            self.login()
+        }
+    }
+    
+    @IBAction func unwindFromMainMenuSegue(segue:UIStoryboardSegue) {
         
     }
+    
     @IBAction func didEndEditing(sender: AnyObject) {
         sender.endEditing(true)
     }

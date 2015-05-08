@@ -22,28 +22,26 @@ class User: NSObject {
                     closure(true)
                 } else {
                     closure(false)
-                    let alert = UIAlertView(title: "Error", message: "Invalid Login Parameters", delegate: nil, cancelButtonTitle: "Ok")
-                    alert.show()
                 }
             })
         }
     }
     
-    class func signUp(username:String, password:String, email:String, company:String) {
+    class func signUp(username:String, password:String, email:String, company:String, realName:String, closure:(Bool)->Void) {
         
         let user = PFUser()
         user.username = username
         user.password = password
         user.email = email
         user["company"] = company
+        user["realName"] = realName
 
         user.signUpInBackgroundWithBlock{(succeeded, error) -> Void in
          
             if error == nil {
-
+                closure(true)
             } else {
-                let alert = UIAlertView(title: "Error", message: "Could not Signup", delegate: nil, cancelButtonTitle: "Ok")
-                alert.show()
+                closure(false)
             }
             
         }
@@ -90,8 +88,16 @@ class User: NSObject {
         return array
     }
     
-    class func logout() {
-        PFUser.logOutInBackground()
+    class func logout(closure:(Bool) -> Void) {
+        PFUser.logOutInBackgroundWithBlock({(error) -> Void in
+            
+            if error == nil {
+                closure(true)
+            } else {
+                closure(false)
+            }
+            
+        })
     }
     
     class func getCurrentUser() -> PFUser? {

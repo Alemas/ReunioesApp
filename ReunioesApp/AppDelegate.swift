@@ -33,6 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        var vc:UIViewController
+//        
+//        if User.getCurrentUser() != nil {
+//            vc = storyboard.instantiateViewControllerWithIdentifier("MainMenu") as! MainMenuViewController
+//        } else {
+//            vc = storyboard.instantiateViewControllerWithIdentifier("Login") as! LoginViewController
+//        }
+//        
+//        self.window?.rootViewController = vc
+        
         return true
     }
 
