@@ -13,16 +13,16 @@ class Meeting: NSObject {
     
     var subject:String
     var creator:PFUser
-    var attendee:NSMutableArray
+    var participants:NSMutableArray
     var address:String
     var date:NSDate
     var tolerance:Int
     
-    init(subject:String, creator:PFUser, attendee:NSArray, address:String, date:NSDate, tolerance:Int) {
+    init(subject:String, creator:PFUser, participants:NSArray, address:String, date:NSDate, tolerance:Int) {
         
         self.subject = subject
         self.creator = creator
-        self.attendee = NSMutableArray(array:attendee)
+        self.participants = NSMutableArray(array:participants)
         self.address = address
         self.date = date
         self.tolerance = tolerance
