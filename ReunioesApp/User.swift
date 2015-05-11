@@ -126,7 +126,8 @@ class User: NSObject {
                     participants: obj["participants"] as! NSArray,
                     address: obj["address"] as! String,
                     date: obj["date"] as! NSDate,
-                    tolerance: obj["tolerance"] as! Int)
+                    tolerance: obj["tolerance"] as! Int,
+                    minorAndMajor: obj["minorAndMajor"] as! NSArray)
                 
                 meetingsArray.addObject(meeting)
             

@@ -9,12 +9,14 @@
 import UIKit
 import Parse
 import Bolts
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-
+    var locationManager = CLLocationManager()
+    var beaconRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "93069B63-F90A-4F7C-85F8-72132FFA9966"), identifier: "imeeting")
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -33,18 +35,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        var vc:UIViewController
-//        
-//        if User.getCurrentUser() != nil {
-//            vc = storyboard.instantiateViewControllerWithIdentifier("MainMenu") as! MainMenuViewController
-//        } else {
-//            vc = storyboard.instantiateViewControllerWithIdentifier("Login") as! LoginViewController
-//        }
-//        
-//        self.window?.rootViewController = vc
-        
+        //ibeacon
+        self.locationManager.delegate = self
+        self.locationManager.requestAlwaysAuthorization()
         return true
+    }
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if(status == CLAuthorizationStatus.AuthorizedAlways){
+            locationManager.startMonitoringForRegion(self.beaconRegion)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
+        locationManager.startRangingBeaconsInRegion(region as! CLBeaconRegion)
+    }
+    
+    func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
+        locationManager.stopRangingBeaconsInRegion(region as! CLBeaconRegion)
+    }
+    
+    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+        for beacon in beacons{
+            let array = [(beacon as! CLBeacon).minor.integerValue, (beacon as! CLBeacon).major.integerValue]
+            let meetings = User.getMeetings()
+            for meet in meetings{
+                if((meet as! Meeting).minorAndMajor == array){
+                    //colocar no parse que estou presente
+                }
+            }
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
