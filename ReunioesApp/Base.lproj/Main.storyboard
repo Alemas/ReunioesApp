@@ -689,13 +689,16 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tw2-xg-GDr">
                                 <rect key="frame" x="0.0" y="110" width="600" height="446"/>
                             </mapView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eQ3-6B-tzM">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Local Search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eQ3-6B-tzM">
                                 <rect key="frame" x="16" y="72" width="568" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="EAi-hX-lqT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <connections>
+                                    <action selector="textFieldReturn:" destination="QKD-p9-Yya" eventType="editingDidEndOnExit" id="haN-5o-S8C"/>
+                                </connections>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n94-BU-3d7">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
@@ -703,7 +706,16 @@
                                     <constraint firstAttribute="height" constant="44" id="lBV-qM-gyD"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Item" id="EzJ-B8-l61"/>
+                                    <barButtonItem title="Find Me" id="EzJ-B8-l61">
+                                        <connections>
+                                            <action selector="findMe:" destination="QKD-p9-Yya" id="e8L-a7-14m"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Map Type" id="An2-JT-jfl">
+                                        <connections>
+                                            <action selector="mapType:" destination="QKD-p9-Yya" id="mZX-QW-T3p"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
