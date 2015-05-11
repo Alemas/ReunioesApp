@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var txfPassword: UITextField!
     @IBOutlet weak var txfUsername: UITextField!
@@ -87,6 +87,19 @@ class LoginViewController: UIViewController {
     
     @IBAction func didEndEditing(sender: AnyObject) {
         sender.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        if textField.returnKeyType == UIReturnKeyType.Next {
+            self.txfPassword.becomeFirstResponder()
+        }
+        if textField.returnKeyType == UIReturnKeyType.Go {
+            self.login()
+        }
+        
+        return true
     }
     
 }
