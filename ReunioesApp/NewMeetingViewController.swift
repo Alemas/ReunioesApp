@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Parse
 
 class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
@@ -46,6 +47,23 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         self.txfAddress.delegate = self
         
+        // Adicionado todos os usuários como participante para teste
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
+        {
+            var query = PFQuery(className:"_User")
+            query.findObjectsInBackgroundWithBlock {
+                (objects, error) -> Void in
+                if error == nil {
+                    if let objects = objects as? [PFObject] {
+                        for object in objects {
+                            if(object["installation"] != nil){
+                                self.participants.addObject(object)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -123,7 +141,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
             alert.show()
             return
         }
-        
+        self.sendPush()
     }
 
     @IBAction func didPressCancel(sender: UIButton) {
@@ -153,6 +171,30 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+
+    func sendPush() -> Void{
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
+        {
+            for(var i = 0 ; i < self.participants.count ; i++){
+                
+                var pfObject:PFObject = self.participants[i] as! PFObject
+
+                var install:PFInstallation = pfObject["installation"] as! PFInstallation
+        
+                var pushQuery:PFQuery = PFInstallation.query()!
+                
+                pushQuery.whereKey("objectId", equalTo: install.objectId!)
+        
+                var pfPush: PFPush = PFPush()
+        
+                pfPush.setQuery(pushQuery)
+        
+                pfPush.setMessage("Você tem uma nova reunião.")
+                                
+                pfPush.sendPushInBackground()
+            }
+        }
     }
     
 }
