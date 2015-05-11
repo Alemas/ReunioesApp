@@ -254,30 +254,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIp-sD-Gou">
-                                <rect key="frame" x="16" y="385" width="568" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="TsY-HJ-hb1"/>
-                                </constraints>
-                                <state key="normal" title="Create Meeting">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didPressCreateMeeting:" destination="MW7-wH-qoV" eventType="touchUpInside" id="s6M-Vb-bFd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9AL-2w-tyS">
-                                <rect key="frame" x="16" y="423" width="568" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="QWj-Jh-5FR"/>
-                                </constraints>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didPressCancel:" destination="MW7-wH-qoV" eventType="touchUpInside" id="cNI-NZ-gCR"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlA-uN-uWh">
                                 <rect key="frame" x="16" y="142" width="68" height="21"/>
                                 <constraints>
@@ -325,29 +301,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VF6-DI-HbN">
-                                <rect key="frame" x="16" y="171" width="568" height="100"/>
+                                <rect key="frame" x="16" y="171" width="568" height="60"/>
+                                <color key="backgroundColor" red="0.42696340460526316" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="mVA-SP-Uah"/>
+                                    <constraint firstAttribute="height" constant="60" id="mVA-SP-Uah"/>
                                 </constraints>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" address="YES"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8x-tm-ATm">
-                                <rect key="frame" x="18" y="279" width="568" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="6em-3Z-rUu"/>
-                                </constraints>
-                                <state key="normal" title="Select Address">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didPressSelectAddress:" destination="MW7-wH-qoV" eventType="touchUpInside" id="kDk-No-TMh"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dI-Sl-Lqy">
-                                <rect key="frame" x="18" y="317" width="568" height="30"/>
+                                <rect key="frame" x="18" y="277" width="568" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HQs-5R-P2n"/>
                                 </constraints>
@@ -356,6 +321,42 @@
                                 </state>
                                 <connections>
                                     <action selector="didPressSelectParticipants:" destination="MW7-wH-qoV" eventType="touchUpInside" id="X6C-b3-j9K"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIp-sD-Gou">
+                                <rect key="frame" x="16" y="345" width="568" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="TsY-HJ-hb1"/>
+                                </constraints>
+                                <state key="normal" title="Create Meeting">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressCreateMeeting:" destination="MW7-wH-qoV" eventType="touchUpInside" id="s6M-Vb-bFd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9AL-2w-tyS">
+                                <rect key="frame" x="16" y="383" width="568" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QWj-Jh-5FR"/>
+                                </constraints>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressCancel:" destination="MW7-wH-qoV" eventType="touchUpInside" id="cNI-NZ-gCR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8x-tm-ATm">
+                                <rect key="frame" x="18" y="239" width="568" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6em-3Z-rUu"/>
+                                </constraints>
+                                <state key="normal" title="Select Address">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressSelectAddress:" destination="MW7-wH-qoV" eventType="touchUpInside" id="kDk-No-TMh"/>
                                 </connections>
                             </button>
                         </subviews>

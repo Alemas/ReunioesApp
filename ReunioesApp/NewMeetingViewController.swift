@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
@@ -18,6 +19,9 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     var didCreateNewMeeting = false
     var participants = NSMutableArray(array: [User.getCurrentUser()!])
     var toleranceValues = NSMutableArray()
+    var tolerance = 5
+    var address = ""
+    var coordinate = NSArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +42,16 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         tolerancePicker.delegate = self
         
         for i in 1...12 {
-            self.toleranceValues.addObject("\(i*5) min")
+            self.toleranceValues.addObject(i*5)
         }
         
         tolerancePicker.backgroundColor = UIColor.whiteColor()
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.txvAddress.text = address
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +74,10 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         if segue.identifier=="showSelectParticipants" {
             var vc = (segue.destinationViewController as!UINavigationController).childViewControllers[0] as! SelectParticipantsTableViewController
             vc.participants = self.participants
+        }
+        
+        if segue.identifier=="showSetAddress" {
+            var vc = (segue.destinationViewController as!UINavigationController).childViewControllers[0] as! SetAddressViewController
         }
         
     }
@@ -118,7 +131,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         return toleranceValues.count
     }
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return toleranceValues[row] as! String
+        return "\(toleranceValues[row] as! String) min"
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.txfTolerance.text = self.toleranceValues[row] as! String
