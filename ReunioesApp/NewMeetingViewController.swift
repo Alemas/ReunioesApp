@@ -74,6 +74,11 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
     }
     
+    @IBAction func unwindFromSetAddress(segue:UIStoryboardSegue) {
+        
+        
+    }
+    
     func didChangeDatePickerValue(sender:UIDatePicker) {
         
         var formatter = NSDateFormatter()
@@ -83,6 +88,11 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
     }
     
+    @IBAction func didPressSelectAddress(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("showSetAddress", sender: nil)
+        
+    }
     @IBAction func didPressSelectParticipants(sender: UIButton) {
         self.performSegueWithIdentifier("showSelectParticipants", sender: nil)
     }
@@ -115,6 +125,6 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     }
     
     @IBAction func didEndEditing(sender: AnyObject) {
-        sender.didEndEditing(true)
+        sender.resignFirstResponder()
     }
 }

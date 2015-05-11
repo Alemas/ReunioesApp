@@ -9,12 +9,13 @@
 import UIKit
 import Parse
 import Bolts
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var locationManager: CLLocationManager?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -33,16 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        var vc:UIViewController
-//        
-//        if User.getCurrentUser() != nil {
-//            vc = storyboard.instantiateViewControllerWithIdentifier("MainMenu") as! MainMenuViewController
-//        } else {
-//            vc = storyboard.instantiateViewControllerWithIdentifier("Login") as! LoginViewController
-//        }
-//        
-//        self.window?.rootViewController = vc
+        self.locationManager = CLLocationManager()
+        self.locationManager?.requestWhenInUseAuthorization()
         
         return true
     }

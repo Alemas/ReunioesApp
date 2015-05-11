@@ -28,24 +28,24 @@ class SelectParticipantsTableViewController: UITableViewController {
             
             self.teste = NSMutableArray()
             
-            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
-            {
-                        var query:PFQuery = PFUser.query()!
-                        
-                        var pfObject:PFObject = query.getObjectWithId("wPuujqOeax")!
-                        
-                        var pushQuery:PFQuery = PFInstallation.query()!
-                        
-                        pushQuery.whereKey("deviceToken", equalTo: "e671011ede48f5897da2d2991603d9c56cf6d6fb57b13d8b4edc1e5f86fa8c2f")
-                        
-                        var pfPush: PFPush = PFPush()
-                        
-                        pfPush.setQuery(pushQuery)
-                        
-                        pfPush.setMessage(":D")
-                        
-                        pfPush.sendPushInBackground()
-            }
+//            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
+//            {
+//                        var query:PFQuery = PFUser.query()!
+//                        
+//                        var pfObject:PFObject = query.getObjectWithId("wPuujqOeax")!
+//                        
+//                        var pushQuery:PFQuery = PFInstallation.query()!
+//                        
+//                        pushQuery.whereKey("deviceToken", equalTo: "e671011ede48f5897da2d2991603d9c56cf6d6fb57b13d8b4edc1e5f86fa8c2f")
+//                        
+//                        var pfPush: PFPush = PFPush()
+//                        
+//                        pfPush.setQuery(pushQuery)
+//                        
+//                        pfPush.setMessage(":D")
+//                        
+//                        pfPush.sendPushInBackground()
+//            }
         }
     }
 
