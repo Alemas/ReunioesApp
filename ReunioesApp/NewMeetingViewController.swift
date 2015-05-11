@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewMeetingViewController: UIViewController {
+class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var txfTolerance: UITextField!
     @IBOutlet weak var txfDate: UITextField!
@@ -16,13 +16,32 @@ class NewMeetingViewController: UIViewController {
     @IBOutlet weak var txvAddress: UITextView!
     
     var didCreateNewMeeting = false
-    var participants = [User.getCurrentUser()]
+    var participants = NSMutableArray(array: [User.getCurrentUser()!])
+    var toleranceValues = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.txvAddress.layer.borderWidth = 1.0
         self.txvAddress.layer.borderColor = UIColor.lightGrayColor().CGColor
+        
+        var datePicker = UIDatePicker()
+        self.txfDate.inputView = datePicker
+        datePicker.datePickerMode = UIDatePickerMode.DateAndTime
+        datePicker.backgroundColor = UIColor.whiteColor()
+        datePicker.minimumDate = NSDate()
+        datePicker.addTarget(self, action: Selector("didChangeDatePickerValue:"), forControlEvents: UIControlEvents.ValueChanged)
+        
+        var tolerancePicker = UIPickerView()
+        self.txfTolerance.inputView = tolerancePicker
+        tolerancePicker.dataSource = self
+        tolerancePicker.delegate = self
+        
+        for i in 1...12 {
+            self.toleranceValues.addObject("\(i*5) min")
+        }
+        
+        tolerancePicker.backgroundColor = UIColor.whiteColor()
         
     }
 
@@ -43,19 +62,29 @@ class NewMeetingViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        if segue.identifier=="showSelectParticipants" {
+            var vc = (segue.destinationViewController as!UINavigationController).childViewControllers[0] as! SelectParticipantsTableViewController
+            vc.participants = self.participants
+        }
         
     }
     
     @IBAction func unwindFromSelectParticipants(segue:UIStoryboardSegue) {
         
         
+    }
+    
+    func didChangeDatePickerValue(sender:UIDatePicker) {
+        
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "MMM/dd/yyyy hh:mm a"
+        let date = formatter.stringFromDate(sender.date)
+        self.txfDate.text = date
         
     }
     
     @IBAction func didPressSelectParticipants(sender: UIButton) {
-        
         self.performSegueWithIdentifier("showSelectParticipants", sender: nil)
-        
     }
 
     @IBAction func didPressCreateMeeting(sender: UIButton) {
@@ -72,5 +101,20 @@ class NewMeetingViewController: UIViewController {
         self.performSegueWithIdentifier("unwindFromNewMeeting", sender: nil)
     }
     
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return toleranceValues.count
+    }
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return toleranceValues[row] as! String
+    }
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.txfTolerance.text = self.toleranceValues[row] as! String
+    }
     
+    @IBAction func didEndEditing(sender: AnyObject) {
+        sender.didEndEditing(true)
+    }
 }

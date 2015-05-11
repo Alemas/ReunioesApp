@@ -223,7 +223,7 @@
                         <viewControllerLayoutGuide type="top" id="ML2-Tt-c6v"/>
                         <viewControllerLayoutGuide type="bottom" id="raF-VA-gKA"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="y4X-pO-r7a">
+                    <view key="view" contentMode="scaleToFill" id="y4X-pO-r7a" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -340,7 +340,7 @@
                         <outlet property="txfTolerance" destination="zmC-gj-RLe" id="Fat-ue-Ki0"/>
                         <outlet property="txvAddress" destination="VF6-DI-HbN" id="9MC-pO-NSi"/>
                         <segue destination="RFc-Fc-nXo" kind="unwind" identifier="unwindFromNewMeeting" unwindAction="unwindFromNewMeeting:" id="B5J-Bj-c9A"/>
-                        <segue destination="pCd-uL-hhm" kind="show" identifier="showSelectParticipants" id="bDm-lq-mQh"/>
+                        <segue destination="4XY-0D-DG3" kind="show" identifier="showSelectParticipants" id="bDm-lq-mQh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdk-rb-Vci" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -348,7 +348,7 @@
             </objects>
             <point key="canvasLocation" x="702" y="992"/>
         </scene>
-        <!--Select Participants Table View Controller-->
+        <!--Colleagues-->
         <scene sceneID="hEw-GS-Q4y">
             <objects>
                 <tableViewController id="pCd-uL-hhm" customClass="SelectParticipantsTableViewController" customModule="ReunioesApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -363,7 +363,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19x-gd-hJl">
-                                            <rect key="frame" x="8" y="11" width="584" height="21"/>
+                                            <rect key="frame" x="54" y="11" width="584" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="8dE-19-PTx"/>
                                             </constraints>
@@ -371,12 +371,27 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="Pld-Cq-Ez9">
+                                            <rect key="frame" x="17" y="12" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Uiz-8E-CCV"/>
+                                                <constraint firstAttribute="width" constant="20" id="oFu-F6-2CK"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Pld-Cq-Ez9" firstAttribute="leading" secondItem="hi1-kb-l8M" secondAttribute="leadingMargin" constant="9" id="1Wn-sM-GeK"/>
                                         <constraint firstItem="19x-gd-hJl" firstAttribute="top" secondItem="hi1-kb-l8M" secondAttribute="topMargin" constant="3" id="Cbr-lf-rcJ"/>
-                                        <constraint firstItem="19x-gd-hJl" firstAttribute="trailing" secondItem="hi1-kb-l8M" secondAttribute="trailingMargin" id="cHC-6a-3mA"/>
-                                        <constraint firstItem="19x-gd-hJl" firstAttribute="leading" secondItem="hi1-kb-l8M" secondAttribute="leadingMargin" id="gcU-5P-Aws"/>
+                                        <constraint firstItem="19x-gd-hJl" firstAttribute="trailing" secondItem="hi1-kb-l8M" secondAttribute="trailingMargin" constant="46" id="cHC-6a-3mA"/>
+                                        <constraint firstItem="19x-gd-hJl" firstAttribute="leading" secondItem="Pld-Cq-Ez9" secondAttribute="trailing" constant="17" id="eKP-Ce-1O3"/>
+                                        <constraint firstItem="19x-gd-hJl" firstAttribute="leading" secondItem="hi1-kb-l8M" secondAttribute="leadingMargin" constant="46" id="gcU-5P-Aws"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Pld-Cq-Ez9" secondAttribute="bottom" constant="3" id="i4w-Mm-Wuz"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="gcU-5P-Aws"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -385,13 +400,20 @@
                             <outlet property="delegate" destination="pCd-uL-hhm" id="vl6-l8-zXw"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Colleagues" id="GEb-ge-xkK">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="IIl-2d-Qf3">
+                            <connections>
+                                <action selector="didPressBack:" destination="pCd-uL-hhm" id="NrP-h4-R2b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="h2C-En-Cga" kind="unwind" identifier="unwindFromSelectParticipants" unwindAction="unwindFromSelectParticipants:" id="pG0-uY-xbq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoF-ks-XtV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1444" y="992"/>
+            <point key="canvasLocation" x="2256" y="992"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="eIC-Mk-pRz">
@@ -559,5 +581,26 @@
             </objects>
             <point key="canvasLocation" x="702" y="199"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2qQ-9O-LYw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4XY-0D-DG3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9gb-of-iAb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pCd-uL-hhm" kind="relationship" relationship="rootViewController" id="UMM-9C-VZd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mtf-6P-dNh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1444" y="992"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="checkmark" width="50" height="50"/>
+    </resources>
 </document>

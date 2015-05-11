@@ -11,7 +11,7 @@ import Parse
 import Bolts
 
 class User: NSObject {
-    
+
     class func login(username:String, password:String, closure:(Bool)->Void) {
         
         if (PFUser.currentUser() == nil) {
