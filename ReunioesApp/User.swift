@@ -35,6 +35,7 @@ class User: NSObject {
         user.email = email
         user["company"] = company
         user["realName"] = realName
+        user["installation"] = PFInstallation.currentInstallation()
 
         user.signUpInBackgroundWithBlock{(succeeded, error) -> Void in
          
