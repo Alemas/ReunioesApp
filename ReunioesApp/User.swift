@@ -126,14 +126,14 @@ class User: NSObject {
                 var data = file.getData()
                 var mapItem = MKMapItem()
                 
-                let meeting = Meeting(subject: obj["subject"] as! String,
-                    creator: obj["creator"] as! PFUser,
-                    participants: obj["participants"] as! NSArray,
-                    address: obj["address"] as! String,
-                    date: obj["date"] as! NSDate,
-                    tolerance: obj["tolerance"] as! Int)
+//                let meeting = Meeting(subject: obj["subject"] as! String,
+//                    creator: obj["creator"] as! PFUser,
+//                    participants: obj["participants"] as! NSArray,
+//                    address: obj["address"] as! String,
+//                    date: obj["date"] as! NSDate,
+//                    tolerance: obj["tolerance"] as! Int)
                 
-                meetingsArray.addObject(meeting)
+//                meetingsArray.addObject(meeting)
             
             }
             

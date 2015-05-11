@@ -12,7 +12,7 @@ import MapKit
 class SetAddressViewController: UIViewController, MKMapViewDelegate {
     
     var address:String?
-    var coordinate:NSArray?
+    var coordinate:NSMutableArray?
     var matchingItems: [MKMapItem] = [MKMapItem]()
     @IBOutlet weak var searchText: UITextField!
     @IBOutlet weak var mapView: MKMapView!
@@ -127,15 +127,11 @@ class SetAddressViewController: UIViewController, MKMapViewDelegate {
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         if control == view.rightCalloutAccessoryView{
             
-            self.address = view.annotation.title
-            self.coordinate = [view.annotation.coordinate.latitude, view.annotation.coordinate.longitude]
+            self.address = String(view.annotation.title!)
+            self.coordinate!.removeAllObjects()
+            self.coordinate!.addObjectsFromArray([view.annotation.coordinate.latitude, view.annotation.coordinate.longitude])
             
-            view.annotation.coordinate
-            println(view.annotation.title) // annotation's title
-            println(view.annotation.subtitle) // annotation's subttitle
-            
-            //Perform a segue here to navigate to another viewcontroller
-            // On tapping the disclosure button you will get here
+            self.performSegueWithIdentifier("unwindFromSetAddress", sender: nil)
         }
     }
     

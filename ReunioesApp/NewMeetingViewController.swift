@@ -9,25 +9,22 @@
 import UIKit
 import MapKit
 
-class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var txfTolerance: UITextField!
     @IBOutlet weak var txfDate: UITextField!
     @IBOutlet weak var txfSubject: UITextField!
-    @IBOutlet weak var txvAddress: UITextView!
+    @IBOutlet weak var txfAddress: UITextField!
     
     var didCreateNewMeeting = false
     var participants = NSMutableArray(array: [User.getCurrentUser()!])
     var toleranceValues = NSMutableArray()
     var tolerance = 5
-    var address = ""
-    var coordinate = NSArray()
+    var address:String?
+    var coordinate = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.txvAddress.layer.borderWidth = 1.0
-        self.txvAddress.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         var datePicker = UIDatePicker()
         self.txfDate.inputView = datePicker
@@ -47,11 +44,15 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         tolerancePicker.backgroundColor = UIColor.whiteColor()
         
+        self.txfAddress.delegate = self
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.txvAddress.text = address
+        if (self.address != nil) {
+            self.txfAddress.text = self.address!
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,7 +63,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     func validFields() -> Bool {
         
         if self.txfSubject.text != "" && self.txfDate.text != "" && txfTolerance != "" &&
-            self.txvAddress.text != "" && self.participants.count>1 {
+            self.txfAddress.text != "" && self.participants.count>1 {
                 return true
         }
         return false
@@ -78,6 +79,8 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         if segue.identifier=="showSetAddress" {
             var vc = (segue.destinationViewController as!UINavigationController).childViewControllers[0] as! SetAddressViewController
+            vc.address = self.address
+            vc.coordinate = self.coordinate
         }
         
     }
@@ -88,7 +91,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     }
     
     @IBAction func unwindFromSetAddress(segue:UIStoryboardSegue) {
-        
+        self.address = segue.sourceViewController.address
         
     }
     
@@ -101,11 +104,14 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
     }
     
-    @IBAction func didPressSelectAddress(sender: AnyObject) {
-        
+    @IBAction func handleAddressTap(sender: AnyObject) {
         self.performSegueWithIdentifier("showSetAddress", sender: nil)
-        
     }
+    
+    @IBAction func didPressSelectAddress(sender: AnyObject) {
+        self.performSegueWithIdentifier("showSetAddress", sender: nil)
+    }
+    
     @IBAction func didPressSelectParticipants(sender: UIButton) {
         self.performSegueWithIdentifier("showSelectParticipants", sender: nil)
     }
@@ -131,7 +137,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         return toleranceValues.count
     }
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return "\(toleranceValues[row] as! String) min"
+        return "\(toleranceValues[row] as! Int) min"
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.txfTolerance.text = self.toleranceValues[row] as! String
@@ -140,4 +146,13 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBAction func didEndEditing(sender: AnyObject) {
         sender.resignFirstResponder()
     }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return false
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
 }
