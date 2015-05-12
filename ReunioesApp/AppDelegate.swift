@@ -56,20 +56,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
-//        if(User.getCurrentUser() != nil){
-//            for beacon in beacons{
-//                let meet = User.getMeetingForMinorAndMajor((beacon as! CLBeacon).minor.integerValue, (beacon as! CLBeacon).major.integerValue)
-//                var query = PFQuery(className: "Meeting_User")
-//                query.whereKey("user", equalTo: User.getCurrentUser()!)
-//                query.whereKey("meeting", equalTo: meet)
-//                let result:NSArray = query.findObjects()!
-//                if(result.count>0){
-//                    var obj:PFObject = result[0] as! PFObject
-//                    obj["present"]=true
-//                    obj.save()
-//                }
-//            }
-//        }
+        if(User.getCurrentUser() != nil){
+            for beacon in beacons{
+                let meet = User.getMeetingForMinorAndMajor((beacon as! CLBeacon).minor.integerValue, major: (beacon as! CLBeacon).major.integerValue)
+                var query = PFQuery(className: "Meeting_User")
+                query.whereKey("user", equalTo: User.getCurrentUser()!)
+                query.whereKey("meeting", equalTo: meet!)
+                let result:NSArray = query.findObjects()!
+                if(result.count>0){
+                    var obj:PFObject = result[0] as! PFObject
+                    obj["present"]=true
+                    obj.save()
+                }
+            }
+        }
     }
     
     func applicationWillResignActive(application: UIApplication) {

@@ -46,7 +46,16 @@ class MeetingDetailViewController: UIViewController {
     }
     
     @IBAction func didPressEmmitSignal(sender: AnyObject) {
-        
+        performSegueWithIdentifier("showIBeacon", sender: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier=="showIBeacon"){
+            let vc = segue.destinationViewController as! iBeaconTransmitterTableViewController
+            vc.minor = (self.meeting!.minorAndMajor[0] as! Int)
+            vc.major = (self.meeting!.minorAndMajor[1] as! Int)
+            
+        }
     }
 
 
