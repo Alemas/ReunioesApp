@@ -22,7 +22,7 @@ class iBeaconTransmitterTableViewController: UITableViewController, CBPeripheral
     var major: Int?
     var minor: Int?
     var inviteds: NSArray?
-    
+    var timer: NSTimer?
     
     var meeting:PFObject?
     
@@ -37,17 +37,32 @@ class iBeaconTransmitterTableViewController: UITableViewController, CBPeripheral
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             self.meeting = User.getMeetingForMinorAndMajor(self.minor!, major: self.major!)
         }
-        var timer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        if (timer != nil) {
+            timer!.invalidate()
+        }
     }
     
     func update(){
+        if view == nil {
+            return
+        }
+        
         var query = PFQuery(className: "Meeting_User")
         if (self.meeting != nil){
             query.whereKey("meeting", equalTo: self.meeting!)
-            self.inviteds = query.findObjects()!
-            self.tableView.reloadData()
+            query.findObjectsInBackgroundWithBlock({ (result, error) -> Void in
+                if error == nil {
+                    self.inviteds = result
+                    self.tableView.reloadData()
+                }
+            })
         }
-        print("oi")
     }
     
     //MARK: CBPeripheralDelegate
