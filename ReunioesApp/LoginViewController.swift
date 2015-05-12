@@ -27,9 +27,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.enableInputs()
         self.activityIndicator.stopAnimating()
         if User.getCurrentUser() != nil {
             self.performSegueWithIdentifier("showMainMenu", sender: nil)
+        }
+    }
+    
+    func disableInputs(){
+        for subview in self.view.subviews {
+            if subview.isKindOfClass(UIButton) {
+                (subview as! UIButton).enabled = false
+            }
+        }
+    }
+    
+    func enableInputs(){
+        for subview in self.view.subviews {
+            if subview.isKindOfClass(UIButton) {
+                (subview as! UIButton).enabled = true
+            }
         }
     }
     
@@ -37,7 +54,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         self.activityIndicator.startAnimating()
         
+        self.disableInputs()
+        
         let closure = {(succeeded:Bool) -> Void in
+            
+            self.enableInputs()
             
             self.activityIndicator.stopAnimating()
             

@@ -15,16 +15,20 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet weak var txfDate: UITextField!
     @IBOutlet weak var txfSubject: UITextField!
     @IBOutlet weak var txfAddress: UITextField!
+    @IBOutlet weak var txvExtraInfo: UITextView!
     
     var didCreateNewMeeting = false
     var participants = NSMutableArray(array: [User.getCurrentUser()!])
     var toleranceValues = NSMutableArray()
     var tolerance = 5
-    var address:String?
+    var address = ""
     var coordinate = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.txvExtraInfo.layer.borderColor = (UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)).CGColor
+        self.txvExtraInfo.layer.borderWidth = 1.0
         
         var datePicker = UIDatePicker()
         self.txfDate.inputView = datePicker
@@ -50,14 +54,11 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if (self.address != nil) {
-            self.txfAddress.text = self.address!
-        }
+        self.txfAddress.text = self.address
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
     }
     
     func validFields() -> Bool {
@@ -79,7 +80,6 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         if segue.identifier=="showSetAddress" {
             var vc = (segue.destinationViewController as!UINavigationController).childViewControllers[0] as! SetAddressViewController
-            vc.address = self.address
             vc.coordinate = self.coordinate
         }
         
@@ -87,12 +87,10 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     @IBAction func unwindFromSelectParticipants(segue:UIStoryboardSegue) {
         
-        
     }
     
     @IBAction func unwindFromSetAddress(segue:UIStoryboardSegue) {
         self.address = segue.sourceViewController.address
-        
     }
     
     func didChangeDatePickerValue(sender:UIDatePicker) {
@@ -108,10 +106,6 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         self.performSegueWithIdentifier("showSetAddress", sender: nil)
     }
     
-    @IBAction func didPressSelectAddress(sender: AnyObject) {
-        self.performSegueWithIdentifier("showSetAddress", sender: nil)
-    }
-    
     @IBAction func didPressSelectParticipants(sender: UIButton) {
         self.performSegueWithIdentifier("showSelectParticipants", sender: nil)
     }
@@ -123,7 +117,6 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
             alert.show()
             return
         }
-        
     }
 
     @IBAction func didPressCancel(sender: UIButton) {
@@ -137,10 +130,10 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         return toleranceValues.count
     }
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return "\(toleranceValues[row] as! Int) min"
+        return "\(self.toleranceValues[row] as! Int) min"
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.txfTolerance.text = self.toleranceValues[row] as! String
+        self.txfTolerance.text = "\(self.toleranceValues[row] as! Int) min"
     }
     
     @IBAction func didEndEditing(sender: AnyObject) {
