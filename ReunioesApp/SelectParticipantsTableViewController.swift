@@ -12,7 +12,7 @@ import Bolts
 
 class SelectParticipantsTableViewController: UITableViewController {
 
-    var participants:NSArray = []
+    var participants:NSMutableArray?
     var colleagues:NSArray = []
     var teste = NSMutableArray()
     
@@ -28,24 +28,24 @@ class SelectParticipantsTableViewController: UITableViewController {
             
             self.teste = NSMutableArray()
             
-            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
-            {
-                        var query:PFQuery = PFUser.query()!
-                        
-                        var pfObject:PFObject = query.getObjectWithId("wPuujqOeax")!
-                        
-                        var pushQuery:PFQuery = PFInstallation.query()!
-                        
-                        pushQuery.whereKey("deviceToken", equalTo: "e671011ede48f5897da2d2991603d9c56cf6d6fb57b13d8b4edc1e5f86fa8c2f")
-                        
-                        var pfPush: PFPush = PFPush()
-                        
-                        pfPush.setQuery(pushQuery)
-                        
-                        pfPush.setMessage(":D")
-                        
-                        pfPush.sendPushInBackground()
-            }
+//            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
+//            {
+//                        var query:PFQuery = PFUser.query()!
+//                        
+//                        var pfObject:PFObject = query.getObjectWithId("wPuujqOeax")!
+//                        
+//                        var pushQuery:PFQuery = PFInstallation.query()!
+//                        
+//                        pushQuery.whereKey("deviceToken", equalTo: "e671011ede48f5897da2d2991603d9c56cf6d6fb57b13d8b4edc1e5f86fa8c2f")
+//                        
+//                        var pfPush: PFPush = PFPush()
+//                        
+//                        pfPush.setQuery(pushQuery)
+//                        
+//                        pfPush.setMessage(":D")
+//                        
+//                        pfPush.sendPushInBackground()
+//            }
         }
     }
 
@@ -53,6 +53,9 @@ class SelectParticipantsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
+    @IBAction func didPressBack(sender: AnyObject) {
+        self.performSegueWithIdentifier("unwindFromSelectParticipants", sender: nil)
+    }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
@@ -67,11 +70,45 @@ class SelectParticipantsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        let colleague = (colleagues[indexPath.row] as! PFObject)
+        
         let label = cell.viewWithTag(1) as! UILabel
-        let name = ((colleagues[indexPath.row] as! PFObject)["realName"] as! String)
+        let name = (colleague["realName"] as! String)
         label.text = name
         
+        let imv = cell.viewWithTag(2) as! UIImageView
+        imv.image = UIImage(named: "unchecked")
+        if self.participants!.containsObject(colleague){
+            imv.image = UIImage(named: "checked")
+            if colleague == User.getCurrentUser(){
+                imv.image = UIImage(named: "checkmark")
+            }
+        }
+                
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+        let colleague = self.colleagues[indexPath.row] as! PFObject
+        let imv = cell?.viewWithTag(2) as! UIImageView
+        
+        if colleague == User.getCurrentUser() {
+            imv.image = UIImage(named: "checkmark")
+            return
+        }
+        
+        if self.participants!.containsObject(colleague) {
+            self.participants!.removeObject(colleague)
+            imv.image = UIImage(named: "unchecked")
+        } else {
+            self.participants!.addObject(colleague)
+            imv.image = UIImage(named: "checked")
+        }
+        
     }
 
 }

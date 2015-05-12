@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MapKit
 
 class Meeting: NSObject {
     
@@ -18,8 +19,9 @@ class Meeting: NSObject {
     var date:NSDate
     var tolerance:Int
     var minorAndMajor:NSArray
+    var coordinate:NSArray
     
-    init(subject:String, creator:PFUser, participants:NSArray, address:String, date:NSDate, tolerance:Int, minorAndMajor:NSArray) {
+        init(subject:String, creator:PFUser, participants:NSArray, address:String, date:NSDate, tolerance:Int, minorAndMajor:NSArray, coordinate:NSArray) {
         
         self.subject = subject
         self.creator = creator
@@ -28,6 +30,7 @@ class Meeting: NSObject {
         self.date = date
         self.tolerance = tolerance
         self.minorAndMajor = minorAndMajor
+        self.coordinate = coordinate
         
     }
    

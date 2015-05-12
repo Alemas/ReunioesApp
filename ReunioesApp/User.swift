@@ -9,9 +9,10 @@
 import UIKit
 import Parse
 import Bolts
+import MapKit
 
 class User: NSObject {
-    
+
     class func login(username:String, password:String, closure:(Bool)->Void) {
         
         if (PFUser.currentUser() == nil) {
@@ -127,7 +128,12 @@ class User: NSObject {
                     address: obj["address"] as! String,
                     date: obj["date"] as! NSDate,
                     tolerance: obj["tolerance"] as! Int,
-                    minorAndMajor: obj["minorAndMajor"] as! NSArray)
+                    minorAndMajor: obj["minorAndMajor"] as! NSArray,
+                    coordinate: obj["coordinate"] as! NSArray)
+                
+                var file = obj["mapItem"] as! PFFile
+                var data = file.getData()
+                var mapItem = MKMapItem()
                 
                 meetingsArray.addObject(meeting)
             
@@ -137,6 +143,26 @@ class User: NSObject {
         }
         
         return array
+    }
+    
+    class func newMeeting(meeting:Meeting, closure:(Bool) -> Void){
+        
+        let object = PFObject(className: "Meeting")
+        object["subject"] = meeting.subject
+        object["creator"] = User.getCurrentUser()
+        object["participants"] = meeting.participants
+        object["address"] = meeting.address
+        object["coordinate"] = meeting.coordinate
+        object["date"] = meeting.date
+        object["tolerance"] = meeting.tolerance
+        object["minorAndMajor"] = meeting.minorAndMajor
+        
+        object.saveInBackgroundWithBlock({(succeeded, error) -> Void in
+        
+            closure(succeeded)
+        
+        })
+        
     }
     
     class func logout(closure:(Bool) -> Void) {
