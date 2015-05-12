@@ -18,12 +18,12 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet weak var txfAddress: UITextField!
     @IBOutlet weak var txvExtraInfo: UITextView!
     
-    var didCreateNewMeeting = false
     var participants = NSMutableArray(array: [User.getCurrentUser()!])
     var toleranceValues = NSMutableArray()
-    var tolerance = 5
+    var tolerance = 0
     var address = ""
     var coordinate = NSMutableArray()
+    var date:NSDate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,23 +51,6 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         self.txfAddress.delegate = self
         
-        // Adicionado todos os usuários como participante para teste
-        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
-        {
-            var query = PFQuery(className:"_User")
-            query.findObjectsInBackgroundWithBlock {
-                (objects, error) -> Void in
-                if error == nil {
-                    if let objects = objects as? [PFObject] {
-                        for object in objects {
-                            if(object["installation"] != nil){
-                                self.participants.addObject(object)
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -81,8 +64,8 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     func validFields() -> Bool {
         
-        if self.txfSubject.text != "" && self.txfDate.text != "" && txfTolerance != "" &&
-            self.txfAddress.text != "" && self.participants.count>1 {
+        if self.txfSubject.text != "" && self.date != nil && self.txfTolerance != "" &&
+            self.txfAddress.text != "" && self.participants.count>1 && self.coordinate != [] {
                 return true
         }
         return false
@@ -117,6 +100,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         formatter.dateFormat = "MMM/dd/yyyy hh:mm a"
         let date = formatter.stringFromDate(sender.date)
         self.txfDate.text = date
+        self.date = sender.date
         
     }
     
@@ -135,6 +119,25 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
             alert.show()
             return
         }
+        
+        let minor = Int(arc4random_uniform(65537))
+        let major = Int(arc4random_uniform(65537))
+        
+        let meeting = Meeting(subject: txfSubject.text, creator: User.getCurrentUser()!, participants: participants, address: txfAddress.text, date: date!, tolerance: tolerance, minorAndMajor: [minor, major], coordinate: coordinate, extraInfo: txvExtraInfo.text)
+        
+        let closure = {(succeeded:Bool) -> Void in
+        
+            if (succeeded) {
+                self.sendPush()
+                self.performSegueWithIdentifier("unwindFromNewMeeting", sender: nil)
+            } else {
+                var alert = UIAlertView(title: "Error", message: "There was an error trying to create the meeting", delegate: nil, cancelButtonTitle: "Ok")
+            }
+        
+        }
+        
+        User.newMeeting(meeting, closure: closure)
+        
     }
 
     @IBAction func didPressCancel(sender: UIButton) {
@@ -152,6 +155,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.txfTolerance.text = "\(self.toleranceValues[row] as! Int) min"
+        self.tolerance = self.toleranceValues[row] as! Int
     }
     
     @IBAction func didEndEditing(sender: AnyObject) {
@@ -169,6 +173,8 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     func sendPush() -> Void{
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
         {
+            let creator = User.getCurrentUser()!["realName"] as! String
+            
             for(var i = 0 ; i < self.participants.count ; i++){
                 
                 var pfObject:PFObject = self.participants[i] as! PFObject
@@ -183,7 +189,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
         
                 pfPush.setQuery(pushQuery)
         
-                pfPush.setMessage("Você tem uma nova reunião.")
+                pfPush.setMessage("\(creator) convocated you for a meeting")
                                 
                 pfPush.sendPushInBackground()
             }

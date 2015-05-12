@@ -99,6 +99,24 @@ class User: NSObject {
         
     }
     
+    class func getMeetingForMinorAndMajor(minor:Int, major:Int) -> PFObject? {
+        
+        if (User.getCurrentUser() == nil){
+            return nil
+        }
+        
+        let query = PFQuery(className: "Meeting")
+        let minorAndMajor = NSArray(array: [minor, major])
+        query.whereKey("minorAndMajor", containsAllObjectsInArray: minorAndMajor as [AnyObject])
+        
+        let result = query.findObjects()
+        if result?.count>0 {
+            return result![0] as? PFObject
+        }
+        return nil
+        
+    }
+    
     class func getMeetings() -> NSArray {
         
         if (User.getCurrentUser() == nil){
@@ -106,13 +124,11 @@ class User: NSObject {
         }
         
         let query = PFQuery(className: "Meeting")
-        query.whereKey("participants", equalTo: User.getCurrentUser()!)
+        query.whereKey("participants", containedIn: [User.getCurrentUser()!])
         
         var array = NSArray()
         
-        query.findObjectsInBackgroundWithBlock{(objects, error) -> Void in
-            array = objects!
-        }
+        array = query.findObjects()!
         
         if array.count>0 {
             
@@ -122,18 +138,19 @@ class User: NSObject {
             
                 let obj = o as! PFObject
                 
+                let relation = obj.relationForKey("participants")
+                let rQuery = relation.query()
+                let participants = rQuery?.findObjects()!
+                
                 let meeting = Meeting(subject: obj["subject"] as! String,
                     creator: obj["creator"] as! PFUser,
-                    participants: obj["participants"] as! NSArray,
+                    participants: participants!,
                     address: obj["address"] as! String,
                     date: obj["date"] as! NSDate,
                     tolerance: obj["tolerance"] as! Int,
                     minorAndMajor: obj["minorAndMajor"] as! NSArray,
-                    coordinate: obj["coordinate"] as! NSArray)
-                
-                var file = obj["mapItem"] as! PFFile
-                var data = file.getData()
-                var mapItem = MKMapItem()
+                    coordinate: obj["coordinate"] as! NSArray,
+                    extraInfo: obj["extraInfo"] as! String)
                 
                 meetingsArray.addObject(meeting)
             
@@ -142,20 +159,32 @@ class User: NSObject {
             return meetingsArray
         }
         
-        return array
+        return []
     }
     
     class func newMeeting(meeting:Meeting, closure:(Bool) -> Void){
         
         let object = PFObject(className: "Meeting")
+        
+        object.save()
+        
+        let relation = object.relationForKey("participants")
+                
+        for p in meeting.participants {
+            let user = p as! PFUser
+            relation.addObject(user)
+        }
+        
         object["subject"] = meeting.subject
         object["creator"] = User.getCurrentUser()
-        object["participants"] = meeting.participants
         object["address"] = meeting.address
         object["coordinate"] = meeting.coordinate
         object["date"] = meeting.date
         object["tolerance"] = meeting.tolerance
         object["minorAndMajor"] = meeting.minorAndMajor
+        object["extraInfo"] = meeting.extraInfo
+        
+        
         
         object.saveInBackgroundWithBlock({(succeeded, error) -> Void in
         
