@@ -129,11 +129,8 @@ class User: NSObject {
                     date: obj["date"] as! NSDate,
                     tolerance: obj["tolerance"] as! Int,
                     minorAndMajor: obj["minorAndMajor"] as! NSArray,
-                    coordinate: obj["coordinate"] as! NSArray)
-                
-                var file = obj["mapItem"] as! PFFile
-                var data = file.getData()
-                var mapItem = MKMapItem()
+                    coordinate: obj["coordinate"] as! NSArray,
+                    extraInfo: obj["extraInfo"] as! String)
                 
                 meetingsArray.addObject(meeting)
             
@@ -142,20 +139,30 @@ class User: NSObject {
             return meetingsArray
         }
         
-        return array
+        return []
     }
     
     class func newMeeting(meeting:Meeting, closure:(Bool) -> Void){
         
         let object = PFObject(className: "Meeting")
+        
+        object.save()
+        
+        let relation = object.relationForKey("participants")
+                
+        for p in meeting.participants {
+            let user = p as! PFUser
+            relation.addObject(user)
+        }
+        
         object["subject"] = meeting.subject
         object["creator"] = User.getCurrentUser()
-        object["participants"] = meeting.participants
         object["address"] = meeting.address
         object["coordinate"] = meeting.coordinate
         object["date"] = meeting.date
         object["tolerance"] = meeting.tolerance
         object["minorAndMajor"] = meeting.minorAndMajor
+        object["extraInfo"] = meeting.extraInfo
         
         object.saveInBackgroundWithBlock({(succeeded, error) -> Void in
         

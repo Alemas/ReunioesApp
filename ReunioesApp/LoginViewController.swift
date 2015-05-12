@@ -65,7 +65,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if (succeeded) {
                 self.performSegueWithIdentifier("showMainMenu", sender: nil)
             } else {
-                var alert = UIAlertView(title: "Error", message: "Invalid Login Paramenters", delegate: nil, cancelButtonTitle: "Ok")
+                var alert = UIAlertView(title: "Error", message: "Parse error", delegate: nil, cancelButtonTitle: "Ok")
                 alert.show()
             }
             

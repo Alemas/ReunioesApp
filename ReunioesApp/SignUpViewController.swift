@@ -70,7 +70,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 self.didCreateNewAccount = true
                 self.performSegueWithIdentifier("unwindFromSignUp", sender: nil)
             } else {
-                var alert = UIAlertView(title: "Error", message: "Invalid Parameters", delegate: nil, cancelButtonTitle: "Ok")
+                var alert = UIAlertView(title: "Error", message: "Parse error", delegate: nil, cancelButtonTitle: "Ok")
                 alert.show()
             }
             
