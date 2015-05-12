@@ -49,6 +49,13 @@ class MainMenuViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func didPressNewMeeting(sender: AnyObject) {
+        self.performSegueWithIdentifier("showNewMeeting", sender: nil)
+    }
+    @IBAction func didPressMeetings(sender: AnyObject) {
+        self.performSegueWithIdentifier("showMeetings", sender: nil)
+    }
 
     @IBAction func didPressLogout(sender: AnyObject) {
         self.disableInputs()
@@ -63,19 +70,13 @@ class MainMenuViewController: UIViewController {
     
     @IBAction func unwindFromSettings(segue:UIStoryboardSegue) {
         
-        
-        
     }
     
     @IBAction func unwindFromNewMeeting(segue:UIStoryboardSegue) {
         
-        
-        
     }
     
     @IBAction func unwindFromMeetings(segue:UIStoryboardSegue) {
-        
-        
         
     }
     
