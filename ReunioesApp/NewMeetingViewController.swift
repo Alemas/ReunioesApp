@@ -169,6 +169,7 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
     func sendPush() -> Void{
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value),0))
         {
+            
             for(var i = 0 ; i < self.participants.count ; i++){
                 
                 var pfObject:PFObject = self.participants[i] as! PFObject
