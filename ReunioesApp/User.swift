@@ -122,18 +122,20 @@ class User: NSObject {
             
                 let obj = o as! PFObject
                 
+                let meeting = Meeting(subject: obj["subject"] as! String,
+                    creator: obj["creator"] as! PFUser,
+                    participants: obj["participants"] as! NSArray,
+                    address: obj["address"] as! String,
+                    date: obj["date"] as! NSDate,
+                    tolerance: obj["tolerance"] as! Int,
+                    minorAndMajor: obj["minorAndMajor"] as! NSArray,
+                    coordinate: obj["coordinate"] as! NSArray)
+                
                 var file = obj["mapItem"] as! PFFile
                 var data = file.getData()
                 var mapItem = MKMapItem()
                 
-//                let meeting = Meeting(subject: obj["subject"] as! String,
-//                    creator: obj["creator"] as! PFUser,
-//                    participants: obj["participants"] as! NSArray,
-//                    address: obj["address"] as! String,
-//                    date: obj["date"] as! NSDate,
-//                    tolerance: obj["tolerance"] as! Int)
-                
-//                meetingsArray.addObject(meeting)
+                meetingsArray.addObject(meeting)
             
             }
             
@@ -150,9 +152,10 @@ class User: NSObject {
         object["creator"] = User.getCurrentUser()
         object["participants"] = meeting.participants
         object["address"] = meeting.address
-        object["coordinates"] = meeting.coordinates
+        object["coordinate"] = meeting.coordinate
         object["date"] = meeting.date
         object["tolerance"] = meeting.tolerance
+        object["minorAndMajor"] = meeting.minorAndMajor
         
         object.saveInBackgroundWithBlock({(succeeded, error) -> Void in
         

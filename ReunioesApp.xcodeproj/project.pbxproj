@@ -18,6 +18,7 @@
 		0A6F843D1AFCE12F00CF8D92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F843C1AFCE12F00CF8D92 /* LoginViewController.swift */; };
 		0A6F84411AFCE62A00CF8D92 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F84401AFCE62A00CF8D92 /* SignUpViewController.swift */; };
 		0A6F84431AFD026500CF8D92 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F84421AFD026500CF8D92 /* MainMenuViewController.swift */; };
+		A4E38D7F1B00CCC1004760FA /* iBeaconTransmitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E38D7E1B00CCC1004760FA /* iBeaconTransmitterViewController.swift */; };
 		0A9076081B011AE1002147E3 /* SetAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9076071B011AE1002147E3 /* SetAddressViewController.swift */; };
 		0A90760C1B018E96002147E3 /* MeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90760B1B018E96002147E3 /* MeetingsViewController.swift */; };
 		EBB981B41AFB99C600163647 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB981B21AFB99C600163647 /* Bolts.framework */; };
@@ -51,6 +52,7 @@
 		0A6F843C1AFCE12F00CF8D92 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0A6F84401AFCE62A00CF8D92 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0A6F84421AFD026500CF8D92 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		A4E38D7E1B00CCC1004760FA /* iBeaconTransmitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iBeaconTransmitterViewController.swift; sourceTree = "<group>"; };
 		0A9076071B011AE1002147E3 /* SetAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetAddressViewController.swift; sourceTree = "<group>"; };
 		0A90760B1B018E96002147E3 /* MeetingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsViewController.swift; sourceTree = "<group>"; };
 		EBB981B21AFB99C600163647 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				0A6F84401AFCE62A00CF8D92 /* SignUpViewController.swift */,
 				0A0335981AFE9C3C00E032D6 /* NewMeetingViewController.swift */,
 				0A03359A1AFF049300E032D6 /* SelectParticipantsTableViewController.swift */,
+				A4E38D7E1B00CCC1004760FA /* iBeaconTransmitterViewController.swift */,
 				0A9076071B011AE1002147E3 /* SetAddressViewController.swift */,
 				0A90760B1B018E96002147E3 /* MeetingsViewController.swift */,
 			);
@@ -265,6 +268,7 @@
 				0A6F84411AFCE62A00CF8D92 /* SignUpViewController.swift in Sources */,
 				0A6F843B1AFCDD8B00CF8D92 /* Meeting.swift in Sources */,
 				0A0335991AFE9C3C00E032D6 /* NewMeetingViewController.swift in Sources */,
+				A4E38D7F1B00CCC1004760FA /* iBeaconTransmitterViewController.swift in Sources */,
 				0A6F84191AFA5EF500CF8D92 /* AppDelegate.swift in Sources */,
 				0A90760C1B018E96002147E3 /* MeetingsViewController.swift in Sources */,
 				0A6F84431AFD026500CF8D92 /* MainMenuViewController.swift in Sources */,

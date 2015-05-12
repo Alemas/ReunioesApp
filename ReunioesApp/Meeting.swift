@@ -18,9 +18,10 @@ class Meeting: NSObject {
     var address:String
     var date:NSDate
     var tolerance:Int
-    var coordinates:NSArray
+    var minorAndMajor:NSArray
+    var coordinate:NSArray
     
-    init(subject:String, creator:PFUser, participants:NSArray, address:String, date:NSDate, tolerance:Int, coordinates:NSArray) {
+        init(subject:String, creator:PFUser, participants:NSArray, address:String, date:NSDate, tolerance:Int, minorAndMajor:NSArray, coordinate:NSArray) {
         
         self.subject = subject
         self.creator = creator
@@ -28,7 +29,8 @@ class Meeting: NSObject {
         self.address = address
         self.date = date
         self.tolerance = tolerance
-        self.coordinates = coordinates
+        self.minorAndMajor = minorAndMajor
+        self.coordinate = coordinate
         
     }
    
