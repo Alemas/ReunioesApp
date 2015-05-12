@@ -178,20 +178,26 @@ class NewMeetingViewController: UIViewController, UIPickerViewDataSource, UIPick
             for(var i = 0 ; i < self.participants.count ; i++){
                 
                 var pfObject:PFObject = self.participants[i] as! PFObject
-
-                var install:PFInstallation = pfObject["installation"] as! PFInstallation
-        
-                var pushQuery:PFQuery = PFInstallation.query()!
                 
-                pushQuery.whereKey("objectId", equalTo: install.objectId!)
+                let participantId = pfObject.objectId
+                let creatorId = User.getCurrentUser()?.objectId
+                
+                if(participantId != creatorId){
+
+                    var install:PFInstallation = pfObject["installation"] as! PFInstallation
         
-                var pfPush: PFPush = PFPush()
+                    var pushQuery:PFQuery = PFInstallation.query()!
+                
+                    pushQuery.whereKey("objectId", equalTo: install.objectId!)
         
-                pfPush.setQuery(pushQuery)
+                    var pfPush: PFPush = PFPush()
         
-                pfPush.setMessage("\(creator) convocated you for a meeting")
+                    pfPush.setQuery(pushQuery)
+        
+                    pfPush.setMessage("\(creator) convocated you for a meeting")
                                 
-                pfPush.sendPushInBackground()
+                    pfPush.sendPushInBackground()
+                }
             }
         }
     }
