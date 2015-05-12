@@ -13,7 +13,6 @@
 		0A6F841E1AFA5EF500CF8D92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F841C1AFA5EF500CF8D92 /* Main.storyboard */; };
 		0A6F84201AFA5EF500CF8D92 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F841F1AFA5EF500CF8D92 /* Images.xcassets */; };
 		0A6F84231AFA5EF500CF8D92 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F84211AFA5EF500CF8D92 /* LaunchScreen.xib */; };
-		0A6F842F1AFA5EF600CF8D92 /* ReunioesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F842E1AFA5EF600CF8D92 /* ReunioesAppTests.swift */; };
 		0A6F84391AFBA73D00CF8D92 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F84381AFBA73D00CF8D92 /* User.swift */; };
 		0A6F843B1AFCDD8B00CF8D92 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F843A1AFCDD8B00CF8D92 /* Meeting.swift */; };
 		0A6F843D1AFCE12F00CF8D92 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F843C1AFCE12F00CF8D92 /* LoginViewController.swift */; };
@@ -35,16 +34,6 @@
 		EBB981D51AFB9AA900163647 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB981D41AFB9AA900163647 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0A6F84291AFA5EF600CF8D92 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0A6F840B1AFA5EF500CF8D92 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0A6F84121AFA5EF500CF8D92;
-			remoteInfo = ReunioesApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		0A0335981AFE9C3C00E032D6 /* NewMeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMeetingViewController.swift; sourceTree = "<group>"; };
 		0A03359A1AFF049300E032D6 /* SelectParticipantsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectParticipantsTableViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +43,6 @@
 		0A6F841D1AFA5EF500CF8D92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A6F841F1AFA5EF500CF8D92 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0A6F84221AFA5EF500CF8D92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		0A6F84281AFA5EF600CF8D92 /* ReunioesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReunioesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6F842D1AFA5EF600CF8D92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A6F842E1AFA5EF600CF8D92 /* ReunioesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReunioesAppTests.swift; sourceTree = "<group>"; };
 		0A6F84381AFBA73D00CF8D92 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -99,13 +87,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0A6F84251AFA5EF600CF8D92 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -122,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				0A6F84131AFA5EF500CF8D92 /* ReunioesApp.app */,
-				0A6F84281AFA5EF600CF8D92 /* ReunioesAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,24 +209,6 @@
 			productReference = 0A6F84131AFA5EF500CF8D92 /* ReunioesApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0A6F84271AFA5EF600CF8D92 /* ReunioesAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0A6F84351AFA5EF600CF8D92 /* Build configuration list for PBXNativeTarget "ReunioesAppTests" */;
-			buildPhases = (
-				0A6F84241AFA5EF600CF8D92 /* Sources */,
-				0A6F84251AFA5EF600CF8D92 /* Frameworks */,
-				0A6F84261AFA5EF600CF8D92 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0A6F842A1AFA5EF600CF8D92 /* PBXTargetDependency */,
-			);
-			name = ReunioesAppTests;
-			productName = ReunioesAppTests;
-			productReference = 0A6F84281AFA5EF600CF8D92 /* ReunioesAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -258,10 +220,6 @@
 				TargetAttributes = {
 					0A6F84121AFA5EF500CF8D92 = {
 						CreatedOnToolsVersion = 6.3.1;
-					};
-					0A6F84271AFA5EF600CF8D92 = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = 0A6F84121AFA5EF500CF8D92;
 					};
 				};
 			};
@@ -279,7 +237,6 @@
 			projectRoot = "";
 			targets = (
 				0A6F84121AFA5EF500CF8D92 /* ReunioesApp */,
-				0A6F84271AFA5EF600CF8D92 /* ReunioesAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -292,13 +249,6 @@
 				0A6F841E1AFA5EF500CF8D92 /* Main.storyboard in Resources */,
 				0A6F84231AFA5EF500CF8D92 /* LaunchScreen.xib in Resources */,
 				0A6F84201AFA5EF500CF8D92 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0A6F84261AFA5EF600CF8D92 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,23 +271,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0A6F84241AFA5EF600CF8D92 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0A6F842F1AFA5EF600CF8D92 /* ReunioesAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0A6F842A1AFA5EF600CF8D92 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0A6F84121AFA5EF500CF8D92 /* ReunioesApp */;
-			targetProxy = 0A6F84291AFA5EF600CF8D92 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0A6F841C1AFA5EF500CF8D92 /* Main.storyboard */ = {
@@ -474,40 +408,6 @@
 			};
 			name = Release;
 		};
-		0A6F84361AFA5EF600CF8D92 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ReunioesAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReunioesApp.app/ReunioesApp";
-			};
-			name = Debug;
-		};
-		0A6F84371AFA5EF600CF8D92 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ReunioesAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReunioesApp.app/ReunioesApp";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -525,15 +425,6 @@
 			buildConfigurations = (
 				0A6F84331AFA5EF600CF8D92 /* Debug */,
 				0A6F84341AFA5EF600CF8D92 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0A6F84351AFA5EF600CF8D92 /* Build configuration list for PBXNativeTarget "ReunioesAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0A6F84361AFA5EF600CF8D92 /* Debug */,
-				0A6F84371AFA5EF600CF8D92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
