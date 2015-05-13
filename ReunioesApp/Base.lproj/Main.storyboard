@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E11f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -70,21 +70,45 @@
                                     <constraint firstAttribute="height" constant="20" id="6Lf-2c-zhW"/>
                                 </constraints>
                             </activityIndicatorView>
+                            <adBannerView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-r4-IQr">
+                                <rect key="frame" x="140" y="530" width="320" height="50"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Xvd-bJ-0Bn"/>
+                                </connections>
+                            </adBannerView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlb-mZ-1bI">
+                                <rect key="frame" x="255" y="432" width="91" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.66682145979020979" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Yo0-rD-Rg7"/>
+                                    <constraint firstAttribute="width" constant="91" id="aJw-rX-UbA"/>
+                                </constraints>
+                                <state key="normal" title="button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buyConsumable:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5wP-Y5-r9X"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZMw-7m-uxw" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="3bC-QU-9OG"/>
                             <constraint firstItem="zmd-Wi-Fl3" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="5ky-ru-nkJ"/>
                             <constraint firstAttribute="centerX" secondItem="ldV-PH-acO" secondAttribute="centerX" id="ODY-gp-uVk"/>
+                            <constraint firstItem="rlb-mZ-1bI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="239" id="QfG-ZR-Nte"/>
                             <constraint firstItem="zmd-Wi-Fl3" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="157" id="UMm-0d-ufN"/>
+                            <constraint firstItem="Pf1-r4-IQr" firstAttribute="top" secondItem="rlb-mZ-1bI" secondAttribute="bottom" constant="68" id="XSS-Cy-bzy"/>
                             <constraint firstItem="ROw-7U-Qpz" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="XZv-9e-oFL"/>
                             <constraint firstItem="ZMw-7m-uxw" firstAttribute="top" secondItem="ROw-7U-Qpz" secondAttribute="bottom" constant="78" id="ZVP-uL-8fS"/>
                             <constraint firstItem="ZMw-7m-uxw" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="cIB-iW-YXs"/>
+                            <constraint firstItem="rlb-mZ-1bI" firstAttribute="top" secondItem="pW2-ds-Jlh" secondAttribute="bottom" constant="41" id="dB9-tX-nnY"/>
                             <constraint firstItem="ROw-7U-Qpz" firstAttribute="top" secondItem="zmd-Wi-Fl3" secondAttribute="bottom" constant="8" id="ezN-9h-Yid"/>
                             <constraint firstItem="ROw-7U-Qpz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fHz-Xg-1rJ"/>
                             <constraint firstItem="ldV-PH-acO" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="61" id="gcG-7J-8EY"/>
                             <constraint firstItem="pW2-ds-Jlh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="h2m-zc-Yvn"/>
                             <constraint firstItem="pW2-ds-Jlh" firstAttribute="top" secondItem="ZMw-7m-uxw" secondAttribute="bottom" constant="8" id="lXL-Fm-eeQ"/>
+                            <constraint firstItem="Pf1-r4-IQr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="124" id="qXQ-hP-HGq"/>
                             <constraint firstItem="pW2-ds-Jlh" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="xRE-Pr-UBV"/>
                             <constraint firstItem="zmd-Wi-Fl3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zAE-KI-Z0o"/>
                         </constraints>
@@ -94,6 +118,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="ldV-PH-acO" id="Kh4-js-siH"/>
+                        <outlet property="banner" destination="Pf1-r4-IQr" id="cvh-6u-Mp4"/>
                         <outlet property="txfPassword" destination="ROw-7U-Qpz" id="MnA-Ch-aPF"/>
                         <outlet property="txfUsername" destination="zmd-Wi-Fl3" id="ilL-0a-FZH"/>
                         <segue destination="XNH-Kp-XnH" kind="show" identifier="showMainMenu" id="hFe-Ud-yll"/>

@@ -62,7 +62,7 @@ class MeetingsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showMeetingDetail" {
             let index = (sender as! NSIndexPath).row
-            (segue.destinationViewController as! MeetingDetailViewController).meeting = self.meetings[index] as! Meeting
+            (segue.destinationViewController as! MeetingDetailViewController).meeting = self.meetings[index] as? Meeting
         }
     }
     
