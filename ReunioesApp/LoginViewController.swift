@@ -8,16 +8,22 @@
 
 import UIKit
 import Parse
+import iAd
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver, ADBannerViewDelegate {
 
     @IBOutlet weak var txfPassword: UITextField!
     @IBOutlet weak var txfUsername: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var product_id: NSString?;
+    @IBOutlet weak var banner: ADBannerView!
+    var iad:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.product_id = "Pope.ReunioesApp"
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +37,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.activityIndicator.stopAnimating()
         if User.getCurrentUser() != nil {
             self.performSegueWithIdentifier("showMainMenu", sender: nil)
+        }
+        
+        if(iad.boolForKey("iad")){
+            banner.hidden = true
         }
     }
     
@@ -124,4 +134,74 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    @IBAction func buyConsumable(sender: UIButton) {
+        if (SKPaymentQueue.canMakePayments())
+        {
+            var productID:NSSet = NSSet(object: self.product_id!);
+            var productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>);
+            productsRequest.delegate = self;
+            productsRequest.start();
+            println("Buscando Produtos");
+        }else{
+            println("Não é possível fazer compras");
+        }
+    }
+    
+    func buyProduct(product: SKProduct){
+        var payment = SKPayment(product: product)
+        SKPaymentQueue.defaultQueue().addPayment(payment);
+        
+    }
+    
+    func productsRequest (request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        var count : Int = response.products.count
+        if (count>0) {
+            var validProducts = response.products
+            var validProduct: SKProduct = response.products[0] as! SKProduct
+            if (validProduct.productIdentifier == self.product_id) {
+                println(validProduct.localizedTitle)
+                println(validProduct.localizedDescription)
+                println(validProduct.price)
+                buyProduct(validProduct);
+            } else {
+                println(validProduct.productIdentifier)
+            }
+        } else {
+            println("nada")
+        }
+    }
+    
+    
+    func request(request: SKRequest!, didFailWithError error: NSError!) {
+        println("Falha");
+    }
+    
+    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!)    {
+        println("Pagamento recebido da apple");
+        
+        for transaction:AnyObject in transactions {
+            if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
+                switch trans.transactionState {
+                case .Purchased:
+                    println("Produto comprado");
+                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
+                    iad.setBool(true, forKey: "iad")
+                    iad.synchronize()
+                    self.banner.hidden = true
+                    break;
+                case .Failed:
+                    println("Compra falhou");
+                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
+                    break;
+                    
+                default:
+                    break;
+                }
+            }
+        }
+    }
+    
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!){
+        
+    }
 }
