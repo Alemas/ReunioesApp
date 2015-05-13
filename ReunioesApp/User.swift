@@ -171,6 +171,11 @@ class User: NSObject {
         let relation = object.relationForKey("participants")
                 
         for p in meeting.participants {
+            let meetingUser = PFObject(className: "Meeting_User")
+            meetingUser["user"] = p
+            meetingUser["meeting"] = object
+            meetingUser["present"] = false
+            meetingUser.saveInBackground()
             let user = p as! PFUser
             relation.addObject(user)
         }

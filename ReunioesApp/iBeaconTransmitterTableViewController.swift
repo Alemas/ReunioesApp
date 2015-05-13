@@ -23,6 +23,7 @@ class iBeaconTransmitterTableViewController: UITableViewController, CBPeripheral
     var minor: Int?
     var inviteds: NSArray?
     var timer: NSTimer?
+    var makingQuery:Bool = false
     
     var meeting:PFObject?
     
@@ -37,6 +38,7 @@ class iBeaconTransmitterTableViewController: UITableViewController, CBPeripheral
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             self.meeting = User.getMeetingForMinorAndMajor(self.minor!, major: self.major!)
         }
+        
         self.timer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
     }
@@ -54,9 +56,11 @@ class iBeaconTransmitterTableViewController: UITableViewController, CBPeripheral
         }
         
         var query = PFQuery(className: "Meeting_User")
-        if (self.meeting != nil){
+        if (self.meeting != nil && !self.makingQuery){
+            self.makingQuery = true
             query.whereKey("meeting", equalTo: self.meeting!)
             query.findObjectsInBackgroundWithBlock({ (result, error) -> Void in
+                self.makingQuery = false
                 if error == nil {
                     self.inviteds = result
                     self.tableView.reloadData()
